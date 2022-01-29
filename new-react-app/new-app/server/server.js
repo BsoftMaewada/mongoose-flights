@@ -1,8 +1,15 @@
+require("dotenv").config();
+
 const express = require('express');// 1.
 const app = express();//1.
 
 const path = require('path');//3.
 const cors = require('cors');//3.
+
+
+//7. Mongoose connection import
+require('./mongoose-connection');
+
 
 app.get('/helloworld', (req, res, next) => {
     res.send('Hello World!');
@@ -18,7 +25,10 @@ const PORT = 5000;//1.
 app.use(cors());
 // to serve static files and to serve the react build 
 app.use(express.static(path.join(__dirname, '..', 'build')));
-app.use(express.static('public')); 
+app.use(express.static('public'));
+
+//5. Express version of body-parser
+app.use(express.json());
 
 //3.
 //IS THE REACT FULL STACK MAGIC MIDDLEWARE
@@ -31,6 +41,6 @@ app.use((req, res, next) => {
     res.sendFile(path.join(__dirname, "..", "build", "index.html"));
 });
 
-app.listen(PORT, () => {
+app.listen(process.env.PORT || 5000, () => {
     console.log('listening on port ' + PORT);
 }); //1.
