@@ -45,6 +45,8 @@
 
 # print(f"Hello!, {full_name.title()}!")
 
+## Using f-string to compose a message
+
 # first_name ="Buhari"
 # last_name ="Maiwada"
 # full_name = f"{first_name} {last_name}"
